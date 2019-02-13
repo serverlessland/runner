@@ -56,10 +56,10 @@ module Commands =
                 | "Azure" -> probabilityChart2 maxInterval 1 intervals 
                 | "GCP" -> probabilityChart2 maxInterval 20 intervals 
                 | _ -> probabilityChart maxInterval intervals
-            do storage.Save (sprintf "ColdStart_%s_Interval.json" cloud) chart
+            do storage.Save (sprintf "coldstart_%s_interval.json" cloud) chart
 
             let chart = scatterChart maxInterval intervals
-            do storage.Save (sprintf "ColdStart_%s_Scatter.json" cloud) chart
+            do storage.Save (sprintf "coldstart_%s_scatter.json" cloud) chart
 
             //do storage.Zip (sprintf "ColdStart_%s.zip" cloud) files
         }
@@ -88,7 +88,7 @@ module Commands =
                         |> List.concat
 
                     let durations = coldStartDurations group.Color responses
-                    storage.Save (sprintf "ColdStart_%s_%s.json" cloud group.Name) durations
+                    //storage.Save (sprintf "ColdStart_%s_%s.json" cloud group.Name) durations
 
                     //do storage.Zip (sprintf "ColdStart_%s_%s.zip" cloud group.Name) files
 
@@ -101,7 +101,8 @@ module Commands =
                 |> Map.ofArray
                 |> coldStartComparison
 
-            storage.Save (sprintf "ColdStart_%s_by%s.json" cloud grouping) summary
+            let cloudString = if cloud = "" then "all" else cloud
+            storage.Save (sprintf "coldstart_%s_by%s.json" cloudString grouping) summary
         }
 
         let trigger (urls: string list) interval count = async {

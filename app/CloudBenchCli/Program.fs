@@ -39,9 +39,9 @@ let impl parts = async {
             //do! commands.Trigger (urls "GCP") 300 50
         
         | ColdStartIntervals ->
-            //do! commands.ColdStartInterval "Azure" 30 (fun filename -> filename.Contains "Python" |> not)
+            do! commands.ColdStartInterval "Azure" 30 (fun filename -> filename.Contains "Python" |> not)
             do! commands.ColdStartInterval "AWS" 90 (fun _ -> true)
-            //do! commands.ColdStartInterval "GCP" 300 (fun _ -> true)
+            do! commands.ColdStartInterval "GCP" 300 (fun _ -> true)
         
         | ColdStartDurations ->
             let languageWindows (name: string) =
@@ -145,22 +145,22 @@ let impl parts = async {
                     else { Name = "NoVPC"; Label = "No VPC"; Order = 1; Color = Some "green" }
                     |> Some 
                 else None
-            //do! commands.ColdStartDuration "Azure" "language" language
-            //do! commands.ColdStartDuration "Azure" "languagewindows" languageWindows
-            //do! commands.ColdStartDuration "Azure" "version" v1v2
-            //do! commands.ColdStartDuration "Azure" "dependencies" dependencies
-            //do! commands.ColdStartDuration "AWS" "language" language
+            do! commands.ColdStartDuration "Azure" "language" language
+            do! commands.ColdStartDuration "Azure" "languagewindows" languageWindows
+            do! commands.ColdStartDuration "Azure" "version" v1v2
+            do! commands.ColdStartDuration "Azure" "dependencies" dependencies
+            do! commands.ColdStartDuration "AWS" "language" language
             do! commands.ColdStartDuration "AWS" "memory" (memory "JSNoop")
             do! commands.ColdStartDuration "AWS" "memoryxl" (memory "JSXL")
             do! commands.ColdStartDuration "AWS" "memoryxxxl" (memory "JSXXXL")
-            //do! commands.ColdStartDuration "AWS" "vpc" vpc
+            do! commands.ColdStartDuration "AWS" "vpc" vpc
             do! commands.ColdStartDuration "AWS" "dependencies" dependencies
-            //do! commands.ColdStartDuration "GCP" "language" languageGcp
-            //do! commands.ColdStartDuration "GCP" "memory" (memory "JSNoop")
-            //do! commands.ColdStartDuration "GCP" "memoryxl" (memory "JSXL")
-            //do! commands.ColdStartDuration "GCP" "memoryxxxl" (memory "JSXXXL")
-            //do! commands.ColdStartDuration "GCP" "dependencies" dependencies
-            //do! commands.ColdStartDuration "" "language" cloudLanguage
+            do! commands.ColdStartDuration "GCP" "language" languageGcp
+            do! commands.ColdStartDuration "GCP" "memory" (memory "JSNoop")
+            do! commands.ColdStartDuration "GCP" "memoryxl" (memory "JSXL")
+            do! commands.ColdStartDuration "GCP" "memoryxxxl" (memory "JSXXXL")
+            do! commands.ColdStartDuration "GCP" "dependencies" dependencies
+            do! commands.ColdStartDuration "" "language" cloudLanguage
             do! commands.ColdStartDuration "" "dependencies" dependencies
 }
 
